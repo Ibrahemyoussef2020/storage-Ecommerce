@@ -1,0 +1,214 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');*/
+/**********************************************/
+/*                 general                    */
+/**********************************************/
+:root{
+    --main-color : #fb4646;
+    --text-color : #171427;
+    --bg-color   : #fff; 
+    --main-font-size : 1.5rem;
+}
+*{
+    font-family: 'Poppins', sans-serif , Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+body,.under-body{
+    min-height: 100vh;
+    min-height: 100%;
+}
+section{
+    padding: 4rem .5rem 3rem;
+}
+a{
+    text-decoration: none;
+}
+button,input{
+    border: .5px solid #000;
+    outline: none;
+}
+i,button,input{
+    cursor: pointer;
+}
+img,.fw{
+    width: 100%;
+}
+.flex{
+    display: flex;
+}
+.grid{
+    display: grid;
+}
+.c-pos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.align{
+    display: flex;
+    align-items: center;
+}
+.justify{
+    display: flex;
+    justify-content: center;
+}
+.center{
+    text-align: center;
+}
+.container{
+    width: 95%;
+    margin: auto;
+}
+.click{
+    cursor: pointer;
+}
+.bold{
+    font-weight: 600;
+}
+/**********************************************/
+/*                  aside                     */
+/**********************************************/
+aside{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 35%;
+    min-width: 300px;
+    height: 100vh;
+    padding: 2rem .5rem;
+    z-index: 10;
+    opacity: 0;
+    transform: scale3d(0,1,1);
+    transition-delay: 1.5s;
+    transition: transform .2s , opacity .2s;
+    transform-origin: top right;
+    overflow-y: auto;
+}
+aside.move{
+    opacity: 1;
+    transform: scale3d(1,1,1);
+}
+aside h4{
+    padding: 2rem 1rem;
+}
+/********cart content************/
+.cart-content{
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+}
+/* cart-box */
+.cart-box{
+    display: grid;
+    grid-template-columns: 32% 50% 18%;
+    align-items: center;
+    gap: 1rem;
+    padding-right: .5rem;
+}
+.cart-box img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: .7rem;
+}
+.cart-box .details{
+   display: grid;
+   row-gap: .5rem;
+   padding-left: 1rem;
+   padding-bottom: 1.7rem;
+   position: relative;
+}
+.cart-product-price{
+    font-weight: 500;
+}
+.cart-box span{
+    display: block;
+}
+.cart-box .quantity{
+    max-width: 30px;
+    border: 1px solid var(--main-color);
+
+}
+.cancel{
+    color: var(--main-color);
+    font-size: 1.2rem;
+}
+/* total */
+.total{
+    justify-content: flex-end;
+    gap: .5rem;
+}
+/* buy */
+.buy{
+    margin: 1.5rem auto 0;
+    padding: .7rem 1.4rem;
+    border-radius: .2rem;
+    background: var(--main-color);
+    color: #fff;
+    border-color: #fff;
+}
+.buy:hover{
+    background: var(--text-color);
+}
+/**********************************************/
+/*                  header                    */
+/**********************************************/
+header{
+    position: fixed;
+    top : 0 ; left : 0;
+    box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
+    z-index: 100;
+}
+nav{
+    padding: 1.1rem 0;
+    justify-content: space-between;
+}
+nav a {
+    font-size: 1.1rem;
+}
+nav .bx{
+    font-size:var(--main-font-size);
+}
+/**********************************************/
+/*                      shop                  */
+/**********************************************/
+.shop{
+    font-weight: 600px;
+}
+.shop-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,auto));
+    gap: 1rem;
+}
+.product-box{
+    position: relative;
+    border: 2px solid transparent;
+}
+.product-box:hover{
+    padding: .7rem;
+    transition:padding .5s ;
+    border: 2px solid #222;
+}
+.product-box img{
+    margin-bottom: .5rem;
+}
+small{
+    font-weight: 600 ;
+}
+.add-cart{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: .4rem;
+    font-weight: 500 !important;
+    background: #000;
+    color: var(--bg-color);
+}
+.add-cart:hover{
+    background: #222;
+}
+.beforeCalc{
+    min-height: 10px;
+    padding: 5px;
+    border: 1px solid #000;
+}
