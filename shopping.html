@@ -5,15 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>restaurant</title>
-    <link href="css/normalize.css" rel="stylesheet">
     <link href="css/shopping.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    
+    <script type="module" src="js/productList.js"  defer></script>
     <script type="module" src="js/helper.js"  defer></script>
     <script type="module" src="js/shopping.js" defer></script>
 </head>
 <body>
+<!--------------------------------->
 <div class="under-body">
-    <aside class="cart">
+    <div class="layOut"></div>
+
+    <!-------------- card ------------------->
+    <aside class="card">
         <h4 class="center">your prducts</h4>
         <!----total----->
         <div class="total flex">
@@ -21,21 +25,8 @@
             <span class="total-price">0</span>
             <span class="length">0</span>
         </div>
-        <!-------cart content--->
-        <div class="cart-content">
-            <!----
-            <div class="cart-box">
-                <img src="images/product2.jpg" alt="shirt">
-               
-                <div class="details">
-                    <span class="cart-product-title">EAIRBOUDS</span>
-                    <span class="cart-product-price">$25</span>
-                    <input type="number" value="1" class="center quantity">
-                </div>
-                
-                <i class='bx bxs-trash-alt cancel'></i>
-            </div>
-        -->
+        <!-------card content--->
+        <div class="card-content">
         </div>
         <!----buy----->
         <button type="button" class="buy flex bold">Buy Now</button>
@@ -45,71 +36,32 @@
     <header class="fw">
         <nav class="align container">
             <a href="#">Ecommerce</a>
-            <i class='bx bx-shopping-bag click cart-icon' id="cart-icon" ></i>
+            <div class="add-card" id="card-icon">
+                <img class="click" src="images/bag.png"/>
+            </div>
         </nav>
     </header>  
 <!-----------------shop-------------------->
-    <section class="shop container">
+    <div class="shop container">
         <h2 class="section-title center">shop Products</h2>
         <div class="shop-content">
-            <div class="product-box">
-                <img src="images/product1.jpg" alt="shirt">
-                <h4>EROREADY SHIRT</h4>
-                <small>$25</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product2.jpg" alt="shirt">
-                <h4>WIRELESS EAIRBOUDS</h4>
-                <small>$100</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product3.jpg" alt="shirt">
-                <h4>HOOD BARKA</h4>
-                <small>$45</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product4.jpg" alt="shirt">
-                <h4>METAL BOTTLE</h4>
-                <small>$24.5</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product5.jpg" alt="shirt">
-                <h4>SILVER METAL</h4>
-                <small>$50</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product6.jpg" alt="shirt">
-                <h4>BACKHAT</h4>
-                <small>$50</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product7.jpg" alt="shirt">
-                <h4>BACKPACK</h4>
-                <small>$75</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
-
-            <div class="product-box">
-                <img src="images/product8.jpg" alt="shirt">
-                <h4>sULSTRABOOST 22</h4>
-                <small>$45</small>
-                <i class='bx bx-shopping-bag add-cart cart-icon click'></i>
-            </div>
         </div>
-    </section>
     </div>
+    <!----------------modal------------------------->
+    <div class="modal">
+        <div class="modal-close center bold">x</div>
+        <div class="modal-img-container">
+            <img class="modal-img" src="images/product7.jpg" alt="you did't show items yet"/>
+        </div>
+        <footer class="flex between">
+            <div>
+                <span class="modal-name bold">Name - </span>
+                <span class="modal-price"> price</span>
+            </div>
+            <span class="modal-isAdded">notAdded</span>
+        </footer>
+    </div>
+<!----------------End------------------------->    
 </div>    
 </body>
 </html>    
