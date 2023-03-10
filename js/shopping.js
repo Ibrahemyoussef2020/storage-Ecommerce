@@ -72,8 +72,8 @@ productBoxs.forEach(productBox =>{
         else{
             if(!e.target.classList.contains('click')){
 
-                let addAttr = productBox.getAttribute("data-added");
-                let isAdded = addAttr === true.toString() ? true : false;
+                const addAttr = productBox.getAttribute("data-added"),
+                 isAdded = addAttr === true.toString() ? true : false;
 
                 modalShow(src,name,price,isAdded)
             }
@@ -85,7 +85,7 @@ productBoxs.forEach(productBox =>{
 ///////////////////////////////////
 function addCardToPurshes({src, name,price,id, count,totalps,isAdded}){
 
-    let addProduct = new AddCards(
+    const addProduct = new AddCards(
         src, name,price,id, count,1, totalps,isAdded
     );
 
@@ -93,7 +93,7 @@ function addCardToPurshes({src, name,price,id, count,totalps,isAdded}){
         purchasesList.push(addProduct);
     }else{
         purchasesList.forEach((product,i)=>{
-            let find = purchasesList.find(product => product.name == name)
+            const find = purchasesList.find(product => product.name == name)
 
             if(find != undefined){  
                 if(product.name === name) product.count++;         
@@ -145,7 +145,7 @@ showPurchases();
 //           remove data        //
 /////////////////////////////////
 function removeFromMainList(e){
-    let TragetItem = e.target.parentElement.parentElement,
+    const TragetItem = e.target.parentElement.parentElement,
         DeletedItem = purchasesList.filter(product => product.id ==  TragetItem.id)[0],
         Price = +DeletedItem.price;
 
@@ -156,7 +156,7 @@ function removeFromMainList(e){
 }
 
 function removeFromCardList(e){
-   let DeletedItem = e.target.parentElement,
+   const DeletedItem = e.target.parentElement,
     Price = qs('.cancel' , DeletedItem),         
     OrignalObject =  productsList.filter((p => p.id == DeletedItem.id))[0],
     OrignalItem =  qs(`#${OrignalObject.id}`,shopContent);
@@ -174,14 +174,13 @@ aside.addEventListener("click",e=>{
     removeFromCardList(e)
     showPurchases();
     localStorage.setItem("package",JSON.stringify(purchasesList))
-
 });
  //////////////////////////////////
 //     modify toggle buttons    //
 /////////////////////////////////
 
 function changeBtnsToRemoveState(parent){
-    let removeSrc = './images/delete-icon.png'  ,  
+    const removeSrc = './images/delete-icon.png'  ,  
         removeClass = 'remove-card-btn toggle-card-img click';
 
     qs('.toggle-card-img',parent).src = removeSrc; 
@@ -190,7 +189,7 @@ function changeBtnsToRemoveState(parent){
 }
 
 function changeBtnsToAddState(parent){
-    let addSrc  = './images/bag.png' ,
+    const addSrc  = './images/bag.png' ,
         addClass = 'add-card-btn toggle-card-img click';  
 
     qs('.toggle-card-img',parent).src = addSrc;
