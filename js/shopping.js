@@ -1,28 +1,28 @@
-import {qs,qsA,AddCards} from "./helper.js";
+import {useSelector,useSelectors,AddCards} from "./helper.js";
 import { productsList,checkIsAdded } from "./productList.js";
 
 ////////////////////////////////////
-const choosen =  qsA(".card-icon"),
-      shopContent = qs(".shop-content"),  
-      cardIcon = qs("#card-icon"),
-      aside     = qs("aside"),
-      productBoxs = qsA(".product-box"),
-      addCards   = qsA(".add-card"),
-      cardContent = qs(".card-content"),
-      totalPrice = qs(".total-price"),
-      beforeCalc = qs(".beforeCalc"),
-      length     = qs(".length"),
+const choosen =  useSelectors(".card-icon"),
+      shopContent = useSelector(".shop-content"),  
+      cardIcon = useSelector("#card-icon"),
+      aside     = useSelector("aside"),
+      productBoxs = useSelectors(".product-box"),
+      addCards   = useSelectors(".add-card"),
+      cardContent = useSelector(".card-content"),
+      totalPrice = useSelector(".total-price"),
+      beforeCalc = useSelector(".beforeCalc"),
+      length     = useSelector(".length"),
 
-      modal   = qs(".modal"),
-      modalClose = qs(".modal-close"),
-      modalImg = qs(".modal-img"),
-      modalName = qs(".modal-name"),
-      modalPrice = qs(".modal-price"),
-      modalIsAdded = qs(".modal-isAdded"),
-      layOut =  qs(".layOut"),
+      modal   = useSelector(".modal"),
+      modalClose = useSelector(".modal-close"),
+      modalImg = useSelector(".modal-img"),
+      modalName = useSelector(".modal-name"),
+      modalprice = useSelector(".modal-price"),
+      modalIsAdded = useSelector(".modal-isAdded"),
+      layOut =  useSelector(".layOut"),
 
-      buy_button = qs(".buy"),
-      test = qs(".test"); 
+      buy_button = useSelector(".buy"),
+      test = useSelector(".test"); 
 
       let purchasesList = JSON.parse(localStorage.getItem("package"))||[],
           total = totalPrice.innerHTML.slice(1,); 
@@ -44,9 +44,9 @@ modalClose.addEventListener("click",e=>{
 //           cereate data       //
 /////////////////////////////////
 productBoxs.forEach(productBox =>{
-    let src   =  qs('img',productBox).src ,            
-        name  =  qs('h4',productBox).innerHTML,         
-        price =  qs('small',productBox).innerHTML.slice(1,),         
+    let src   =  useSelector('img',productBox).src ,            
+        name  =  useSelector('h4',productBox).innerHTML,         
+        price =  useSelector('small',productBox).innerHTML.slice(1,),         
         id    = productBox.id,
         count = 1,
         totalps = +price,
@@ -93,10 +93,10 @@ function addCardToPurshes({src, name,price,id, count,totalps,isAdded}){
         purchasesList.push(addProduct);
     }else{
         purchasesList.forEach((product,i)=>{
-            const find = purchasesList.find(product => product.name == name)
+            const find = purchasesList.find(product => product.id == id)
 
             if(find != undefined){  
-                if(product.name === name) product.count++;         
+                if(product.id === id) product.count++;         
             }else{
                 purchasesList.push(addProduct); 
             }
@@ -110,9 +110,9 @@ function addCardToPurshes({src, name,price,id, count,totalps,isAdded}){
 function modalShow(src,name,price,isAdded){
     modal.style.display = 'block'
     modalImg.src = src
-    modalName.innerHTML = `${name} - `
-    modalPrice.innerHTML = price
-    modalIsAdded.innerHTML = isAdded ? 'added' : 'didnt add'
+    modalName.textContent =`${name} - `
+    modalprice.textContent = price
+    modalIsAdded.textContent = isAdded ? 'added' : 'didnt add'
     layOut.style.display = 'block'
 } 
  //////////////////////////////////
@@ -122,22 +122,22 @@ function showPurchases(){
     let choosenProduct = "";
     let total = 0;
     purchasesList.forEach(function(product,i){ 
-        total += purchasesList[i].totalps * +purchasesList[i].count
+        total += product.totalps * +product.count
         choosenProduct += 
         `<div class="card-box" id="${product.id}" data-added=${product.isAdded}>
-            <img src="${purchasesList[i].src}" alt="shirt">
+            <img src="${product.src}" alt="shirt">
             <div class="details">
-                <span class="card-product-title">${purchasesList[i].name}</span>
-                <span class="card-product-price">$${purchasesList[i].price}</span>
-                <input code="${purchasesList[i].id}" value="${purchasesList[i].count}"   class="center quantity mainCount">
+                <span class="card-product-title">${product.name}</span>
+                <span class="card-product-price">$${product.price}</span>
+                <input code="${product.id}" value="${product.count}"   class="center quantity mainCount">
             </div>
             <img class='cancel' src='./images/delete-icon.png'>
         </div>
         `
     });
     cardContent.innerHTML = choosenProduct;
-    totalPrice.innerHTML = total ; 
-    length.innerHTML = purchasesList.length || "";
+    totalPrice.textContent = total; 
+    length.textContent = purchasesList.length || 0;
 
 };
 showPurchases();
@@ -145,35 +145,37 @@ showPurchases();
 //           remove data        //
 /////////////////////////////////
 function removeFromMainList(e){
-    const TragetItem = e.target.parentElement.parentElement,
-        DeletedItem = purchasesList.filter(product => product.id ==  TragetItem.id)[0],
-        Price = +DeletedItem.price;
+    const tragetItem = e.target.parentElement.parentElement,
+        deletedItem = purchasesList.filter(product => product.id ==  tragetItem.id)[0],
+        price = +deletedItem.price;
 
-        purchasesList = purchasesList.filter((p => p.id != DeletedItem.id)); 
-        totalPrice.innerHTML = +totalPrice.innerHTML -  Price; 
+        purchasesList = purchasesList.filter((p => p.id != deletedItem.id)); 
+        totalPrice.textContent = +totalPrice.textContent -  price; 
 
-        changeBtnsToAddState(TragetItem)
+        changeBtnsToAddState(tragetItem)
 }
 
 function removeFromCardList(e){
-   const DeletedItem = e.target.parentElement,
-    Price = qs('.cancel' , DeletedItem),         
-    OrignalObject =  productsList.filter((p => p.id == DeletedItem.id))[0],
-    OrignalItem =  qs(`#${OrignalObject.id}`,shopContent);
+   const deletedItem = e.target.parentElement,
+    price = useSelector('.cancel' , deletedItem),         
+    orignalObject =  productsList.filter((p => p.id == deletedItem.id))[0],
+    orignalItem =  useSelector(`#${orignalObject.id}`,shopContent);
 
-    purchasesList = purchasesList.filter((p => p.id != DeletedItem.id));
-    totalPrice.innerHTML = +totalPrice.innerHTML -  Price; 
+    purchasesList = purchasesList.filter((p => p.id != deletedItem.id));
+    totalPrice.textContent = +totalPrice.textContent -  price;  
 
-    changeBtnsToAddState(OrignalItem); 
+    changeBtnsToAddState(orignalItem); 
 
-    OrignalItem.dataset.added = false
-    OrignalObject.isAdded = false 
+    orignalItem.dataset.added = false
+    orignalObject.isAdded = false 
 }
 
-aside.addEventListener("click",e=>{
-    removeFromCardList(e)
-    showPurchases();
-    localStorage.setItem("package",JSON.stringify(purchasesList))
+aside.addEventListener("click",e =>{
+    if(e.target.classList.contains('cancel')){
+        removeFromCardList(e)
+        showPurchases();
+        localStorage.setItem("package",JSON.stringify(purchasesList))    
+    }
 });
  //////////////////////////////////
 //     modify toggle buttons    //
@@ -183,18 +185,18 @@ function changeBtnsToRemoveState(parent){
     const removeSrc = './images/delete-icon.png'  ,  
         removeClass = 'remove-card-btn toggle-card-img click';
 
-    qs('.toggle-card-img',parent).src = removeSrc; 
-    qs('.toggle-card-img',parent).className = removeClass;
-    qs('.add-more',parent).className = 'add-more add-card-btn inline-add-more' ;
+    useSelector('.toggle-card-img',parent).src = removeSrc; 
+    useSelector('.toggle-card-img',parent).className = removeClass;
+    useSelector('.add-more',parent).className = 'add-more add-card-btn inline-add-more' ;
 }
 
 function changeBtnsToAddState(parent){
     const addSrc  = './images/bag.png' ,
         addClass = 'add-card-btn toggle-card-img click';  
 
-    qs('.toggle-card-img',parent).src = addSrc;
-    qs('.toggle-card-img',parent).className = addClass;
-    qs('.add-more',parent).className = 'add-more add-card-btn none-add-more' ;   
+    useSelector('.toggle-card-img',parent).src = addSrc;
+    useSelector('.toggle-card-img',parent).className = addClass;
+    useSelector('.add-more',parent).className = 'add-more add-card-btn none-add-more' ;   
 }
 
 

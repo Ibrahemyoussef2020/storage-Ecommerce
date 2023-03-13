@@ -1,8 +1,8 @@
-export function qs(element , parent = document){
+export function useSelector(element , parent = document){
     return parent.querySelector(element)
 }
 
-export function qsA(element , parent = document){
+export function useSelectors(element , parent = document){
     return [...parent.querySelectorAll(element)]
 }
 

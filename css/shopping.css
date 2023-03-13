@@ -17,7 +17,7 @@
 }
 body,.under-body{
     min-height: 100vh;
-    min-height: 100%;
+    height: 100%;
 }
 section{
     padding: 4rem .5rem 3rem;
@@ -177,7 +177,7 @@ aside h4{
 /*                  header                    */
 /**********************************************/
 header{
-    position: fixed;
+    position: sticky;
     top : 0 ; left : 0;
     box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
     z-index: 100;
