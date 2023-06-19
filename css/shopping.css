@@ -214,11 +214,16 @@ header .length{
     font-weight: 600px;
     margin-top: 1rem;
 }
+.shop h1{
+    margin:1rem 0;
+}
+
 .shop-content{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(320px,auto));
     gap: 1rem;
 }
+
 .product-box{
     position: relative;
     border: 2px solid transparent;
@@ -256,6 +261,10 @@ small{
     font-weight: 900;
     transform-origin: top left;
     transition: transform 1.2s , display .2s;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .none-add-more{
     transform: scale3d(0,1,1) !important;

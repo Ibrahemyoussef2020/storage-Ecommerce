@@ -3,29 +3,29 @@ import { productsList,checkIsAdded } from "./productList.js";
 
 ////////////////////////////////////
 const choosen =  useSelectors(".card-icon"),
-      shopContent = useSelector(".shop-content"),  
-      cardIcon = useSelector("#card-icon"),
-      aside     = useSelector("aside"),
-      productBoxs = useSelectors(".product-box"),
-      addCards   = useSelectors(".add-card"),
-      cardContent = useSelector(".card-content"),
-      totalPrice = useSelector(".total-price"),
-      beforeCalc = useSelector(".beforeCalc"),
-      length     = useSelector(".length"),
+    shopContent = useSelector(".shop-content"),  
+    cardIcon = useSelector("#card-icon"),
+    aside     = useSelector("aside"),
+    productBoxs = useSelectors(".product-box"),
+    addCards   = useSelectors(".add-card"),
+    cardContent = useSelector(".card-content"),
+    totalPrice = useSelector(".total-price"),
+    beforeCalc = useSelector(".beforeCalc"),
+    length     = useSelector(".length"),
 
-      modal   = useSelector(".modal"),
-      modalClose = useSelector(".modal-close"),
-      modalImg = useSelector(".modal-img"),
-      modalName = useSelector(".modal-name"),
-      modalprice = useSelector(".modal-price"),
-      modalIsAdded = useSelector(".modal-isAdded"),
-      layOut =  useSelector(".layOut"),
+    modal   = useSelector(".modal"),
+    modalClose = useSelector(".modal-close"),
+    modalImg = useSelector(".modal-img"),
+    modalName = useSelector(".modal-name"),
+    modalprice = useSelector(".modal-price"),
+    modalIsAdded = useSelector(".modal-isAdded"),
+    layOut =  useSelector(".layOut"),
 
-      buy_button = useSelector(".buy"),
-      test = useSelector(".test"); 
+    buy_button = useSelector(".buy"),
+    test = useSelector(".test"); 
 
-      let purchasesList = JSON.parse(localStorage.getItem("package"))||[],
-          total = totalPrice.innerHTML.slice(1,); 
+    let purchasesList = JSON.parse(localStorage.getItem("package"))||[],
+        total = totalPrice.innerHTML.slice(1,); 
         
  //////////////////////////////////
  //         toggle aside        //
@@ -50,7 +50,7 @@ productBoxs.forEach(productBox =>{
         id    = productBox.id,
         count = 1,
         totalps = +price,
-        isAdded = checkIsAdded(productBox.name) ;   
+        isAdded = checkIsAdded(id) ;   
 
     productBox.onclick = function(e){
         

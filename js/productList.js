@@ -1,9 +1,9 @@
 const getLocalStorage = JSON.parse(localStorage.getItem("package")) || [];
 
 
-export function checkIsAdded(name){
+export function checkIsAdded(id){
     const getLocalStorageLinght = getLocalStorage && getLocalStorage.length;
-    const isFind = getLocalStorage.some(itemData => itemData.name == name);  
+    const isFind = getLocalStorage.some(itemData => itemData.id == id);  
     return isFind
 }
 
